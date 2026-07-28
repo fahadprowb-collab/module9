@@ -1,0 +1,305 @@
+/* ============================================================
+   MODULE 9 DEMO STYLES
+   Palette matches the lecture deck: deep ocean blue + warm accent
+   ============================================================ */
+
+:root {
+  --primary: #1B4965;
+  --primary-dark: #0F2D3D;
+  --tint: #E8F1F2;
+  --accent: #F4A259;
+  --teal: #5FA8D3;
+  --green: #3A8E5C;
+  --red: #C1443C;
+  --text-dark: #1B2A2E;
+  --text-muted: #5B6B70;
+  --white: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Calibri, Arial, sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: Cambria, Georgia, serif; color: var(--primary); margin-top: 0; }
+
+a { color: var(--primary); }
+
+/* ============================================================
+   ACCESSIBILITY: skip link (Section 4)
+   Hidden off-screen until it receives keyboard focus
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 0.5rem;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 0.4rem 0.4rem;
+  z-index: 100;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================================
+   ACCESSIBILITY: visible focus for every interactive element
+   (Section 4 — never remove outline without replacing it)
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   RESPONSIVE TYPOGRAPHY (Section 1) — clamp() scales font
+   size fluidly between a floor and a ceiling, no media query
+   ============================================================ */
+.hero h1 {
+  font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
+}
+.hero .lead {
+  font-size: clamp(1rem, 1vw + 0.75rem, 1.25rem);
+  color: var(--text-muted);
+  max-width: 40rem;
+}
+
+/* ============================================================
+   HEADER + RESPONSIVE NAVIGATION (Section 3)
+   Mobile: hamburger toggle shows/hides the nav list.
+   Desktop (768px+): nav is always visible, toggle is hidden.
+   ============================================================ */
+.site-header {
+  background: var(--primary);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  color: var(--white);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+.nav-toggle {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+  font-size: 1.2rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.main-nav {
+  display: none;
+  width: 100%;
+}
+.main-nav.open { display: block; }
+.main-nav ul {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.main-nav a {
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  padding: 0.4rem 0.2rem;
+}
+.main-nav a:hover { text-decoration: underline; }
+
+@media (min-width: 768px) {
+  .nav-toggle { display: none; }
+  .main-nav { display: block; width: auto; }
+  .main-nav ul { flex-direction: row; gap: 1.5rem; margin: 0; }
+}
+
+/* ============================================================
+   PAGE SECTIONS — shared spacing
+   ============================================================ */
+main section, .hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+.hero { padding-bottom: 1rem; }
+
+/* ============================================================
+   CSS GRID DASHBOARD (Section 3)
+   Mobile: 1 column. From 768px: auto-fit flexible columns.
+   From 992px: locked to exactly 3 equal columns.
+   ============================================================ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+@media (min-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.card {
+  background: var(--tint);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid #D7E4E8;
+}
+.card h3 { margin-bottom: 0.4rem; }
+
+/* ============================================================
+   RESPONSIVE IMAGE GALLERY (Section 2)
+   auto-fit + minmax reflows columns with no media query
+   ============================================================ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+/* ============================================================
+   RESPONSIVE VIDEO (Section 2)
+   aspect-ratio keeps a correct 16:9 shape at any width
+   ============================================================ */
+.video-wrap {
+  aspect-ratio: 16 / 9;
+  max-width: 800px;
+  margin-top: 1rem;
+}
+.video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0.5rem;
+}
+
+/* ============================================================
+   ARIA DROPDOWN DEMO (Section 4)
+   ============================================================ */
+.filter-wrap { position: relative; display: inline-block; margin-top: 0.5rem; }
+.filter-btn {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.filter-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: var(--white);
+  border: 1px solid #D7E4E8;
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+  min-width: 200px;
+}
+.filter-menu[hidden] { display: none; }
+.filter-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+.filter-menu a:hover, .filter-menu a:focus-visible { background: var(--tint); }
+.hint { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.75rem; }
+
+/* ============================================================
+   ACCESSIBLE CONTACT FORM (Section 4)
+   ============================================================ */
+.contact-form fieldset {
+  border: 1px solid #D7E4E8;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  max-width: 500px;
+}
+.contact-form legend {
+  font-weight: bold;
+  color: var(--primary);
+  padding: 0 0.4rem;
+}
+.form-row { margin-bottom: 1rem; }
+.form-row label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+.form-row input, .form-row textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #B9CCD2;
+  border-radius: 0.35rem;
+  font: inherit;
+}
+.form-text { color: var(--text-muted); font-size: 0.85rem; margin: 0.3rem 0 0; }
+.contact-form button[type="submit"] {
+  background: var(--accent);
+  color: var(--primary-dark);
+  border: none;
+  font-weight: bold;
+  padding: 0.6rem 1.3rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+.form-status { font-weight: bold; margin-top: 0.75rem; }
+.form-status.success { color: var(--green); }
+.form-status.error { color: var(--red); }
+
+/* ============================================================
+   SEMANTIC FLEXBOX FOOTER (Section 3)
+   Stacks on mobile, spreads into columns on wider screens
+   ============================================================ */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background: var(--primary-dark);
+  color: #DCEAF0;
+  padding: 2.5rem 1rem;
+}
+.site-footer > * { flex: 1 1 220px; }
+.site-footer h2 { color: var(--white); font-size: 1.1rem; }
+.site-footer a { color: var(--accent); }
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { margin-bottom: 0.4rem; }

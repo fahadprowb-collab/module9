@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- SECTION 1: without this, mobile browsers render at desktop width and zoom out -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Services Portal — Module 9 Demo</title>
+<link rel="stylesheet" href="style9.css">
+</head>
+<body>
+
+<!-- Skip link: first focusable element on the page, for keyboard & screen reader users -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================================================
+     SEMANTIC HEADER + RESPONSIVE NAV (Sections 3 & 4)
+     ============================================================ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="brand">Student Services Portal</a>
+
+    <!-- Accessible nav toggle: real <button>, aria-expanded kept in sync by app9.js -->
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation menu">
+      <span aria-hidden="true">&#9776;</span>
+    </button>
+
+    <nav class="main-nav" id="mainNav" aria-label="Main">
+      <ul>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       HERO — responsive typography with clamp() (Section 1)
+       ============================================================ -->
+  <section class="hero">
+    <h1>Welcome back, Jordan</h1>
+    <p class="lead">Your courses, assessments and attendance — all in one responsive, accessible place.</p>
+  </section>
+
+  <!-- ============================================================
+       CSS GRID DASHBOARD — Section 3
+       Mobile: stacks to 1 column. Tablet (768px): 2 columns.
+       Desktop (992px): named grid-template-areas layout.
+       ============================================================ -->
+  <section id="dashboard" class="dashboard" aria-labelledby="dashboard-heading">
+    <h2 id="dashboard-heading">Your Dashboard</h2>
+    <div class="dashboard-grid">
+      <article class="card">
+        <h3>Courses</h3>
+        <p>3 units in progress this trimester.</p>
+      </article>
+      <article class="card">
+        <h3>Assessments</h3>
+        <p>Assessment 2 due in 6 days.</p>
+      </article>
+      <article class="card">
+        <h3>Attendance</h3>
+        <p>92% attendance this trimester.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RESPONSIVE IMAGE GALLERY — Section 2
+       srcset lets the browser pick the right file for screen size
+       ============================================================ -->
+  <section id="gallery" class="gallery-section" aria-labelledby="gallery-heading">
+    <h2 id="gallery-heading">Campus Gallery</h2>
+    <div class="gallery">
+      <img
+        src="https://picsum.photos/id/1015/800/600"
+        srcset="https://picsum.photos/id/1015/400/300 400w,
+                https://picsum.photos/id/1015/800/600 800w"
+        sizes="(max-width: 600px) 100vw, 33vw"
+        alt="Students studying together at a table in the campus library">
+      <img
+        src="https://picsum.photos/id/1025/800/600"
+        srcset="https://picsum.photos/id/1025/400/300 400w,
+                https://picsum.photos/id/1025/800/600 800w"
+        sizes="(max-width: 600px) 100vw, 33vw"
+        alt="Lecturer demonstrating a UX wireframe on a whiteboard">
+      <img
+        src="https://picsum.photos/id/1040/800/600"
+        srcset="https://picsum.photos/id/1040/400/300 400w,
+                https://picsum.photos/id/1040/800/600 800w"
+        sizes="(max-width: 600px) 100vw, 33vw"
+        alt="Graduating students celebrating outside the main campus building">
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RESPONSIVE VIDEO — Section 2
+       aspect-ratio keeps a correct 16:9 shape at any width
+       ============================================================ -->
+  <section id="video" class="video-section" aria-labelledby="video-heading">
+    <h2 id="video-heading">Assessment 2 Walkthrough</h2>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="Assessment 2 walkthrough video"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ACCESSIBLE, KEYBOARD-OPERABLE DROPDOWN — Section 4
+       Real <button> (focusable & clickable by default) +
+       ARIA role/state kept in sync with visibility by app9.js
+       ============================================================ -->
+  <section class="filter-demo" aria-labelledby="filter-heading">
+    <h2 id="filter-heading">Filter Courses (ARIA Demo)</h2>
+    <div class="filter-wrap">
+      <button id="filterBtn" class="filter-btn" aria-expanded="false" aria-controls="filterMenu">
+        Filter <span aria-hidden="true">&#9662;</span>
+      </button>
+      <ul id="filterMenu" class="filter-menu" role="menu" hidden>
+        <li role="none"><a role="menuitem" href="#">Active courses</a></li>
+        <li role="none"><a role="menuitem" href="#">Completed courses</a></li>
+        <li role="none"><a role="menuitem" href="#">All courses</a></li>
+      </ul>
+    </div>
+    <p class="hint">Try this with a mouse, then again using only Tab, Enter and Esc.</p>
+  </section>
+
+  <!-- ============================================================
+       ACCESSIBLE CONTACT FORM — Section 4
+       fieldset/legend, linked labels, aria-describedby hints,
+       and live-region error messaging handled in app9.js
+       ============================================================ -->
+  <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Contact Student Services</h2>
+    <form id="contactForm" class="contact-form" novalidate>
+      <fieldset>
+        <legend>Send us a message</legend>
+
+        <div class="form-row">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email address (required)</label>
+          <input id="email" name="email" type="email" required aria-describedby="email-help">
+          <p id="email-help" class="form-text">We'll only use this to reply to you.</p>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+
+        <button type="submit">Send Message</button>
+
+        <!-- aria-live announces new content to screen readers without moving focus -->
+        <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+      </fieldset>
+    </form>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     SEMANTIC, FLEXBOX FOOTER — Section 3
+     ============================================================ -->
+<footer class="site-footer">
+  <section>
+    <h2>Student Services Portal</h2>
+    <p>UED100 &middot; Module 9 demo page.</p>
+  </section>
+  <nav aria-label="Footer">
+    <h2>Quick Links</h2>
+    <ul>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h2>Accessibility</h2>
+    <p>This page targets WCAG 2.1 AA. <a href="#main">Report an issue</a>.</p>
+  </section>
+</footer>
+
+<script src="app9.js"></script>
+</body>
+</html>
