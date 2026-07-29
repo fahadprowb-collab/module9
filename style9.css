@@ -164,7 +164,7 @@ main section, .hero {
 }
 @media (min-width: 992px) {
   .dashboard-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .card {
